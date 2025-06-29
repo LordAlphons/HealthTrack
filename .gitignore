@@ -1,0 +1,48 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+.settings/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# Eclipse / IntelliJ
+*.classpath
+*.project
+*.settings/
+*.factorypath
+/.idea
+*.sublime*
+
+# Coverage reports
+jacoco.exec
+/site/
+coverage/
+target/site/jacoco/
+
+# OS / File system
+.DS_Store
+Thumbs.db
+
+# JMeter test results
+*.jtl
+*.bak
+*.jmx~
+
+# SonarQube
+.sonar/
+sonar-report.json
+
+# Misc
+*.swp
+*.tmp
+*.log
+*.out
