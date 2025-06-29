@@ -33,6 +33,16 @@ jobs:
       - name: Generate coverage report
         run: mvn jacoco:report
 
+      - name: Run SonarQube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: |
+          mvn verify sonar:sonar \
+            -Dsonar.projectKey=HealthTrack \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN
+
       - name: Upload coverage HTML as artifact
         uses: actions/upload-artifact@v4
         with:
