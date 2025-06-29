@@ -1,5 +1,7 @@
 # HealthTrack 🩺📊
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=LordAlphons_HealthTrack&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=LordAlphons_HealthTrack)
+
 **HealthTrack** es una aplicación Java orientada al seguimiento de salud personal, diseñada con principios de calidad de software, automatización y cobertura de código continua.
 
 ---
@@ -7,11 +9,10 @@
 ## 🚀 Características principales
 
 - 🧪 Pruebas automatizadas con Maven y JUnit
+- ✅ Cobertura de código con JaCoCo
+- 🧠 Análisis estático con SonarCloud y CI/CD
 - 📦 Gestión de dependencias con Maven
-- ✅ Integración continua con GitHub Actions
-- 🎯 Cobertura de código con JaCoCo
-- 🧠 Análisis estático de código con SonarQube
-- ♻️ Uso de caché para mejorar tiempos de build
+- ⚙️ Cacheo inteligente para builds eficientes
 
 ---
 
@@ -19,10 +20,10 @@
 
 - Java 17 (Temurin)
 - Maven
-- JUnit
+- JUnit 5
 - JaCoCo
 - GitHub Actions
-- SonarQube (instancia local vía Docker)
+- SonarCloud
 
 ---
 
@@ -32,73 +33,67 @@
 mvn clean install
 ```
 
-O bien, para ver reportes y cobertura:
+Para generar los reportes de cobertura:
 
 ```bash
-mvn verify jacoco:report
+mvn jacoco:report
+```
+
+Y para ejecutar manualmente el análisis estático (opcional):
+
+```bash
+mvn verify sonar:sonar \
+  -Dsonar.projectKey=LordAlphons_HealthTrack \
+  -Dsonar.organization=lordalphons \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.token=TU_TOKEN_AQUI
 ```
 
 ---
 
-## 🧪 Pruebas unitarias
+## 🧪 Pruebas y cobertura
 
-Los tests se ejecutan automáticamente al compilar el proyecto y generan reportes en:
+Los tests se ejecutan automáticamente al compilar el proyecto, y generan:
 
-```
-target/surefire-reports
-```
-
-La cobertura de código está disponible en:
-
-```
-target/site/jacoco/index.html
-```
+- Reportes en: `target/surefire-reports`
+- Cobertura HTML en: `target/site/jacoco/index.html`
 
 ---
 
-## 📊 Análisis de código
+## 📊 Análisis estático
 
-El análisis de calidad y cobertura se realiza con SonarQube:
+El análisis de calidad se realiza automáticamente en cada push a `master`, gracias al pipeline configurado en GitHub Actions. SonarCloud analiza:
 
-- URL local: [http://localhost:9000](http://localhost:9000)
-- Proyecto: `HealthTrack`
-- Integrado vía GitHub Actions
+- Code Smells 😷
+- Bugs 🐞
+- Cobertura de código 📈
+- Seguridad 🔐
+
+Accedé al tablero 👉 [SonarCloud: HealthTrack](https://sonarcloud.io/dashboard?id=LordAlphons_HealthTrack)
 
 ---
 
-## 📂 Estructura del pipeline CI/CD
+## 📂 CI/CD
 
-El flujo automatizado realiza:
+El workflow se ejecuta desde `.github/workflows/ci.yml` y realiza:
 
-1. Checkout del repositorio
+1. Checkout del repositorio (`fetch-depth: 0`)
 2. Configuración de JDK 17
-3. Caché de dependencias Maven
-4. Ejecución de pruebas con cobertura
-5. Reporte HTML de JaCoCo como artefacto
-6. Análisis en SonarQube
-
-Todo desde `.github/workflows/ci.yml`
-
----
-
-## 📥 Instalación de SonarQube (opcional)
-
-```bash
-docker run -d --name sonarqube \
-  -p 9000:9000 \
-  -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true \
-  sonarqube:lts
-```
+3. Cacheo de dependencias
+4. Ejecución de pruebas
+5. Generación del reporte de cobertura
+6. Análisis en SonarCloud
+7. Publicación de artefactos del reporte
 
 ---
 
-## 🧑‍💻 Autor
+## 👤 Autor
 
 Desarrollado por [Alfonso Garrido]
-Apasionado por la eficiencia, la automatización y los videojuegos 🎮
+Full Stack Developer apasionado por la automatización, la eficiencia y los videojuegos 🎮
 
 ---
 
 ## 📄 Licencia
 
-MIT License
+MIT License — libre para que aprendas, compartas y expandas 🚀
